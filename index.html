@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louis Chen · Translation Student | AI Learner</title>
+<meta name="description" content="Louis Chen 的个人主页：英语翻译专业学生，正在学习 Python、AI 工具和英语，Building in public。热爱篮球与旅行，探索不同文化。">
+<meta name="keywords" content="Louis Chen, 个人主页, translation student, AI learner, Python, English, building in public, no-code">
+<meta name="author" content="Louis Chen">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://louis7ree.github.io/">
+
+<!-- Open Graph：链接分享到社交平台时显示的卡片 -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://louis7ree.github.io/">
+<meta property="og:title" content="Louis Chen · Translation Student | AI Learner">
+<meta property="og:description" content="英语翻译专业学生，正在学习 Python、AI 工具和英语，Building in public。">
+<meta property="og:image" content="https://louis7ree.github.io/me.png">
+
+<!-- Twitter/X 卡片 -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ree07rose">
+<meta name="twitter:title" content="Louis Chen · Translation Student | AI Learner">
+<meta name="twitter:description" content="英语翻译专业学生，正在学习 Python、AI 工具和英语，Building in public。">
+<meta name="twitter:image" content="https://louis7ree.github.io/me.png">
+
+<!-- 搜索引擎结构化数据：告诉 Google 这是一个人的主页 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Louis Chen",
+  "url": "https://louis7ree.github.io/",
+  "image": "https://louis7ree.github.io/me.png",
+  "jobTitle": "Translation Student",
+  "sameAs": [
+    "https://github.com/Louis7ree",
+    "https://x.com/ree07rose"
+  ],
+  "description": "Translation student learning Python, AI tools and English. Building in public."
+}
+</script>
+<style>
+  /* ---------- 基础与变量 ---------- */
+  :root {
+    --bg: #0a0a10;
+    --card: rgba(255, 255, 255, 0.045);
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.22);
+    --text: #e8e8f0;
+    --text-dim: #8b8b9e;
+    --accent-1: #7c6cff;
+    --accent-2: #4dd0e1;
+    --accent-3: #ff6ec7;
+    --radius: 22px;
+    --gap: 18px;
+    --font: "Inter", "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- 背景极光光晕 ---------- */
+  .aurora {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  .aurora.a1 { width: 480px; height: 480px; top: -160px; left: -120px; background: radial-gradient(circle, var(--accent-1), transparent 70%); }
+  .aurora.a2 { width: 420px; height: 420px; bottom: -140px; right: -100px; background: radial-gradient(circle, var(--accent-2), transparent 70%); animation-delay: -8s; }
+  .aurora.a3 { width: 360px; height: 360px; top: 40%; left: 55%; background: radial-gradient(circle, var(--accent-3), transparent 70%); opacity: 0.28; animation-delay: -16s; }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(60px, 40px) scale(1.15); }
+  }
+
+  /* ---------- Bento 网格 ---------- */
+  .grid {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1080px;
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "profile profile status  status"
+      "profile profile social  social"
+      "feat    feat    skills  skills"
+      "feat    feat    skills  skills"
+      "p2      p2      p3      p3"
+      "contact contact contact contact"
+      "guest   guest   guest   guest";
+  }
+
+  /* ---------- 玻璃拟态卡片 ---------- */
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+    animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* 鼠标聚光灯 */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%),
+                rgba(255, 255, 255, 0.08), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-hover);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+  }
+  .card:hover::before { opacity: 1; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+  .card:nth-child(6) { animation-delay: 0.40s; }
+  .card:nth-child(7) { animation-delay: 0.47s; }
+  .card:nth-child(8) { animation-delay: 0.54s; }
+
+  /* ---------- 区域分配 ---------- */
+  .profile { grid-area: profile; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .status  { grid-area: status; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .social  { grid-area: social; display: flex; align-items: center; justify-content: space-around; gap: 12px; }
+  .feat    { grid-area: feat; }
+  .skills  { grid-area: skills; }
+  .p2      { grid-area: p2; }
+  .p3      { grid-area: p3; }
+  .contact { grid-area: contact; }
+  .guest   { grid-area: guest; }
+
+  /* ---------- 个人资料 ---------- */
+  .avatar {
+    width: 92px;
+    height: 92px;
+    border-radius: 28px;
+    object-fit: cover;
+    border: 1px solid var(--border-hover);
+    box-shadow: 0 8px 28px rgba(124, 108, 255, 0.35);
+    transition: transform 0.4s ease;
+  }
+  .profile:hover .avatar { transform: scale(1.05) rotate(-2deg); }
+
+  .profile h1 { font-size: 30px; letter-spacing: -0.5px; }
+  .profile h1 span {
+    background: linear-gradient(120deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .profile .bio { color: var(--text-dim); font-size: 15px; line-height: 1.7; max-width: 340px; }
+
+  /* ---------- 当前状态 ---------- */
+  .status-head { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  }
+  .status .doing { font-size: 16px; line-height: 1.6; }
+  .status .clock { font-size: 13px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+
+  /* ---------- 社交链接 ---------- */
+  .social a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 12px;
+    padding: 10px 18px;
+    border-radius: 14px;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .social a svg { width: 22px; height: 22px; fill: currentColor; }
+  .social a:hover { color: var(--text); background: rgba(255, 255, 255, 0.07); transform: translateY(-3px); }
+
+  /* ---------- 项目卡片 ---------- */
+  .proj { display: flex; flex-direction: column; gap: 10px; }
+  .proj h3 { font-size: 17px; letter-spacing: -0.3px; }
+  .proj p { color: var(--text-dim); font-size: 13px; line-height: 1.6; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .card:hover .tag { color: var(--text); border-color: var(--border-hover); }
+
+  .feat { min-height: 100%; }
+
+  /* ---------- 技能云 ---------- */
+  .skills h2, .sec-title { font-size: 15px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; }
+  .cloud { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+  .skill {
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    cursor: default;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  .skill:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: rgba(124, 108, 255, 0.18);
+    border-color: rgba(124, 108, 255, 0.5);
+    color: #fff;
+  }
+
+  /* ---------- 单词工具 ---------- */
+  .tool-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .word-date { margin-left: auto; font-size: 12px; color: var(--text-dim); }
+  .word-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .word-item {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 130px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .word-item:hover { background: rgba(255,255,255,0.08); }
+  .word-item.expanded {
+    flex-basis: 100%;
+    background: rgba(124,108,255,0.1);
+    border-color: rgba(124,108,255,0.3);
+  }
+  .word-main { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+  .word-text { font-weight: 600; font-size: 13px; }
+  .word-phonetic { font-size: 11px; color: var(--text-dim); font-style: italic; }
+  .word-arrow { font-size: 10px; color: var(--text-dim); transition: transform 0.3s ease; }
+  .word-item.expanded .word-arrow { transform: rotate(180deg); }
+  .word-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin-top 0.35s ease; }
+  .word-item.expanded .word-detail { max-height: 110px; margin-top: 6px; }
+  .word-pos { font-size: 11px; color: var(--accent-2); margin-right: 4px; }
+  .word-mean { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .word-ex { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-style: italic; line-height: 1.4; }
+
+  /* ---------- 翻译练习 ---------- */
+  .trans-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .trans-item { padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s ease; }
+  .trans-item:hover { background: rgba(255,255,255,0.07); }
+  .trans-en { font-size: 12.5px; color: var(--text); line-height: 1.5; margin-bottom: 2px; }
+  .trans-zh { font-size: 12px; color: var(--text-dim); line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin-top 0.35s ease; }
+  .trans-item.expanded .trans-zh { max-height: 80px; margin-top: 6px; }
+  .trans-hint { font-size: 11px; color: var(--accent-2); margin-top: 4px; }
+
+  /* ---------- No-code 工具 ---------- */
+  .tool-links { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .tool-link {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 9px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .tool-link:hover { background: rgba(255,255,255,0.08); border-color: var(--border-hover); transform: translateX(4px); }
+  .tool-name { font-weight: 600; font-size: 13px; color: var(--accent-2); }
+  .tool-desc { font-size: 11.5px; color: var(--text-dim); line-height: 1.4; }
+
+  /* ---------- 提示条 ---------- */
+  .toast {
+    position: fixed;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: rgba(24, 24, 38, 0.92);
+    border: 1px solid var(--border-hover);
+    border-radius: 999px;
+    padding: 12px 26px;
+    font-size: 13.5px;
+    color: var(--text);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ---------- 留言板 ---------- */
+  .guest h3 { font-size: 17px; margin-bottom: 6px; }
+  .guest > p { color: var(--text-dim); font-size: 13px; margin-bottom: 16px; }
+  .guest-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .guest-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .guest-input::placeholder { color: var(--text-dim); opacity: 0.7; }
+  .guest-input:focus { border-color: var(--border-hover); background: rgba(255,255,255,0.07); }
+  .guest-textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+  .guest-submit {
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+  }
+  .guest-list { display: flex; flex-direction: column; gap: 10px; max-height: 340px; overflow-y: auto; padding-right: 6px; }
+  .guest-list::-webkit-scrollbar { width: 6px; }
+  .guest-list::-webkit-scrollbar-track { background: transparent; }
+  .guest-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+  .guest-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.28); }
+  .guest-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: background 0.3s ease;
+    animation: msgIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .guest-item:hover { background: rgba(255,255,255,0.07); }
+  .guest-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 600; color: #fff;
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .guest-body { flex: 1; min-width: 0; }
+  .guest-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; gap: 10px; }
+  .guest-name { font-weight: 600; font-size: 13px; color: var(--accent-2); }
+  .guest-time { font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
+  .guest-msg { font-size: 13px; color: var(--text); line-height: 1.6; word-break: break-word; white-space: pre-wrap; }
+  .guest-empty { color: var(--text-dim); font-size: 13px; text-align: center; padding: 16px; }
+
+  /* ---------- 联系按钮 ---------- */
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .contact .text h2 { font-size: 22px; margin-bottom: 6px; letter-spacing: -0.4px; }
+  .contact .text p { color: var(--text-dim); font-size: 14px; }
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 34px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(120deg, var(--accent-1), var(--accent-3));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 26px rgba(124, 108, 255, 0.35);
+  }
+  .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 36px rgba(124, 108, 255, 0.55); }
+  .btn svg { width: 17px; height: 17px; fill: currentColor; }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 26px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12.5px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "profile profile"
+        "status  social"
+        "feat    feat"
+        "skills  skills"
+        "p2      p2"
+        "p3      p3"
+        "contact contact"
+        "guest   guest";
+    }
+  }
+  @media (max-width: 540px) {
+    body { padding: 28px 14px; }
+    .grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "profile" "status" "social" "feat" "skills" "p2" "p3" "contact" "guest";
+    }
+    .card { padding: 22px; }
+    .contact { justify-content: center; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 背景光晕 -->
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+
+  <main class="grid">
+
+    <!-- 1. 个人资料 -->
+    <section class="card profile">
+      <img class="avatar" alt="Louis 的头像" src="me.png">
+      <h1>Louis <span>Chen</span></h1>
+      <p class="bio">Translation student | AI & No-code learner 🤖<br>Loves basketball & travelling to explore different cultures.</p>
+    </section>
+
+    <!-- 5. 当前状态 -->
+    <section class="card status">
+      <div class="status-head"><span class="dot"></span>当前状态</div>
+      <p class="doing">Learning Python, AI & English · Building in public</p>
+      <p class="clock" id="clock"></p>
+    </section>
+
+    <!-- 2. 社交链接 -->
+    <section class="card social">
+      <a href="https://github.com/Louis7ree" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a href="https://x.com/ree07rose" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"/></svg>
+        X
+      </a>
+      <a href="#" class="copy-email" data-email="2696846320@qq.com" aria-label="复制邮箱">
+        <svg viewBox="0 0 24 24"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8.6L3.5 6.2v12.1h17V6.2L12 12.6zM4.6 6h14.8L12 10.9 4.6 6z"/></svg>
+        邮箱
+      </a>
+    </section>
+
+    <!-- 3. 每日单词工具 -->
+    <section class="card proj feat">
+      <div class="tool-header">
+        <h3>📚 每日雅思词汇</h3>
+        <span class="word-date" id="wordDate"></span>
+      </div>
+      <p>每天 10 个精选雅思核心词，点击单词展开释义、例句和多义。</p>
+      <div class="word-list" id="wordList"></div>
+    </section>
+
+    <!-- 4. 技能云 -->
+    <section class="card skills">
+      <h2>技能</h2>
+      <div class="cloud">
+        <span class="skill">Python</span><span class="skill">English</span>
+        <span class="skill">Translation</span><span class="skill">AI Tools</span>
+        <span class="skill">No-code</span><span class="skill">Prompt Engineering</span>
+      </div>
+    </section>
+
+    <!-- 5. 翻译练习 -->
+    <section class="card proj p2">
+      <div class="tool-header">
+        <h3>🌐 外交英语翻译</h3>
+      </div>
+      <p>每日 5 句外交英语，先自己翻，点击看参考译文。</p>
+      <div class="trans-list" id="transList"></div>
+    </section>
+
+    <!-- 6. No-code 工具 -->
+    <section class="card proj p3">
+      <div class="tool-header">
+        <h3>🛠️ No-code 工具</h3>
+      </div>
+      <p>适合 Vibe Coding 的实用工具推荐。</p>
+      <div class="tool-links">
+        <a href="https://trae.ai" target="_blank" class="tool-link">
+          <span class="tool-name">Trae</span>
+          <span class="tool-desc">AI 编程工具，用自然语言生成代码</span>
+        </a>
+        <a href="https://v0.dev" target="_blank" class="tool-link">
+          <span class="tool-name">v0.dev</span>
+          <span class="tool-desc">AI 生成 UI 界面</span>
+        </a>
+        <a href="https://cursor.com" target="_blank" class="tool-link">
+          <span class="tool-name">Cursor</span>
+          <span class="tool-desc">AI 代码编辑器</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 6. 联系 -->
+    <section class="card contact">
+      <div class="text">
+        <h2>有想法想聊聊？</h2>
+        <p>无论是合作、外包还是单纯打个招呼，都欢迎来信。</p>
+      </div>
+      <a class="btn copy-email" href="#" data-email="2696846320@qq.com">
+        <svg viewBox="0 0 24 24"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8.6L3.5 6.2v12.1h17V6.2L12 12.6zM4.6 6h14.8L12 10.9 4.6 6z"/></svg>
+        联系我
+      </a>
+    </section>
+
+    <!-- 7. 留言板 -->
+    <section class="card guest">
+      <h3>💬 留言板</h3>
+      <p>留言数据保存在本地浏览器（localStorage），其他人在这个设备上也能看到。如需跨设备实时同步，需接入后端服务。</p>
+      <form class="guest-form" id="guestForm">
+        <input type="text" class="guest-input" id="guestName" placeholder="你的名字" maxlength="20" required>
+        <textarea class="guest-input guest-textarea" id="guestMsg" placeholder="想说点什么..." maxlength="200" required></textarea>
+        <button type="submit" class="btn guest-submit">提交留言</button>
+      </form>
+      <div class="guest-list" id="guestList">
+        <div class="guest-empty">还没有留言，来抢沙发～</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2026 Louis Chen · 用心构建</footer>
+
+  <!-- 提示条 -->
+  <div class="toast" id="toast"></div>
+
+<script>
+  // ---------- 提示条 ----------
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // ---------- 复制邮箱 ----------
+  function copyEmail(email) {
+    const done = () => showToast('邮箱地址已复制：' + email);
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(done).catch(() => fallbackCopy(email, done));
+    } else {
+      fallbackCopy(email, done);
+    }
+  }
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); }
+    catch { showToast('复制失败，请手动复制：' + text); }
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-email').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      copyEmail(el.dataset.email);
+    });
+  });
+
+  // ---------- 鼠标聚光灯 ----------
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ---------- 状态卡片时钟 ----------
+  const clock = document.getElementById('clock');
+  function tick() {
+    const now = new Date();
+    clock.textContent = '本地时间 · ' + now.toLocaleTimeString('zh-CN', { hour12: false });
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // ---------- 每日单词数据 ----------
+  const vocabData = [
+    { w: "abandon", p: "/əˈbændən/", pos: "v.", m: "放弃；抛弃", ex: "He abandoned his car in the snow.", m2: "n. 放纵，放任" },
+    { w: "benefit", p: "/ˈbenɪfɪt/", pos: "n./v.", m: "好处；有益于", ex: "Exercise benefits both body and mind.", m2: "n. 福利；津贴" },
+    { w: "challenge", p: "/ˈtʃælɪndʒ/", pos: "n./v.", m: "挑战；质疑", ex: "This task is a real challenge.", m2: "v. 向…挑战" },
+    { w: "decade", p: "/ˈdekeɪd/", pos: "n.", m: "十年", ex: "Prices have risen steadily over the past decade.", m2: "" },
+    { w: "efficient", p: "/ɪˈfɪʃnt/", pos: "adj.", m: "高效的", ex: "This is a more efficient way to work.", m2: "" },
+    { w: "flexible", p: "/ˈfleksəbl/", pos: "adj.", m: "灵活的", ex: "We need a flexible schedule.", m2: "adj. 柔韧的" },
+    { w: "global", p: "/ˈɡloʊbl/", pos: "adj.", m: "全球的", ex: "Climate change is a global issue.", m2: "adj. 总体的" },
+    { w: "habitat", p: "/ˈhæbɪtæt/", pos: "n.", m: "栖息地", ex: "The forest is a habitat for many species.", m2: "" },
+    { w: "impact", p: "/ˈɪmpækt/", pos: "n./v.", m: "影响；冲击", ex: "Social media has a huge impact on society.", m2: "v. 对…产生影响" },
+    { w: "journal", p: "/ˈdʒɜːnl/", pos: "n.", m: "期刊；日记", ex: "She writes in her journal every night.", m2: "" },
+    { w: "keen", p: "/kiːn/", pos: "adj.", m: "热衷的；敏锐的", ex: "He is keen on playing basketball.", m2: "adj. 激烈的（竞争）" },
+    { w: "launch", p: "/lɔːntʃ/", pos: "v./n.", m: "发起；发射", ex: "They will launch a new product next month.", m2: "n. 发射；下水" },
+    { w: "maintain", p: "/meɪnˈteɪn/", pos: "v.", m: "维持；保养", ex: "It's important to maintain a healthy diet.", m2: "v. 坚称" },
+    { w: "notion", p: "/ˈnoʊʃn/", pos: "n.", m: "概念；想法", ex: "I have no notion of what he means.", m2: "" },
+    { w: "obtain", p: "/əbˈteɪn/", pos: "v.", m: "获得", ex: "You need to obtain permission first.", m2: "" },
+    { w: "pursue", p: "/pərˈsuː/", pos: "v.", m: "追求；从事", ex: "She decided to pursue a career in translation.", m2: "v. 追赶" },
+    { w: "reliable", p: "/rɪˈlaɪəbl/", pos: "adj.", m: "可靠的", ex: "This is a reliable source of information.", m2: "" },
+    { w: "significant", p: "/sɪɡˈnɪfɪkənt/", pos: "adj.", m: "重要的；显著的", ex: "There has been a significant improvement.", m2: "adj. 意味深长的" },
+    { w: "trend", p: "/trend/", pos: "n.", m: "趋势", ex: "The trend towards online learning continues.", m2: "" },
+    { w: "unique", p: "/juˈniːk/", pos: "adj.", m: "独特的", ex: "Everyone has a unique perspective.", m2: "adj. 独一无二的" },
+    { w: "vary", p: "/ˈveri/", pos: "v.", m: "变化；使多样化", ex: "Prices vary from store to store.", m2: "" },
+    { w: "widespread", p: "/ˈwaɪdspred/", pos: "adj.", m: "广泛的", ex: "The disease became widespread.", m2: "" },
+    { w: "academic", p: "/ˌækəˈdemɪk/", pos: "adj./n.", m: "学术的；学者", ex: "She has a strong academic background.", m2: "" },
+    { w: "barrier", p: "/ˈbæriər/", pos: "n.", m: "障碍", ex: "Language is not a barrier to friendship.", m2: "n. 屏障" },
+    { w: "campaign", p: "/kæmˈpeɪn/", pos: "n./v.", m: "运动；活动", ex: "They launched a campaign to protect the environment.", m2: "" },
+    { w: "domestic", p: "/dəˈmestɪk/", pos: "adj.", m: "国内的；家庭的", ex: "Domestic flights are usually cheaper.", m2: "adj. 驯养的" },
+    { w: "emerge", p: "/iˈmɜːrdʒ/", pos: "v.", m: "出现；显露", ex: "New technologies are emerging rapidly.", m2: "" },
+    { w: "feature", p: "/ˈfiːtʃər/", pos: "n./v.", m: "特点；以…为特色", ex: "This phone has many new features.", m2: "v. 主演" },
+    { w: "generate", p: "/ˈdʒenəreɪt/", pos: "v.", m: "产生；发电", ex: "The project will generate new jobs.", m2: "" },
+    { w: "highlight", p: "/ˈhaɪlaɪt/", pos: "v./n.", m: "强调；亮点", ex: "The report highlights the need for change.", m2: "n. 最精彩的部分" }
+  ];
+
+  // ---------- 翻译练习数据 ----------
+  const transData = [
+    { en: "China has always pursued a peaceful foreign policy.", zh: "中国一贯奉行和平的外交政策。" },
+    { en: "The two countries agreed to strengthen diplomatic ties.", zh: "两国同意加强外交关系。" },
+    { en: "Climate change requires global cooperation.", zh: "气候变化需要全球合作。" },
+    { en: "The ambassador delivered a speech at the United Nations.", zh: "大使在联合国发表了演讲。" },
+    { en: "Trade negotiations are ongoing between the two nations.", zh: "两国之间的贸易谈判正在进行中。" },
+    { en: "Cultural exchange promotes mutual understanding.", zh: "文化交流促进相互理解。" },
+    { en: "The treaty was signed after months of discussion.", zh: "经过数月的讨论，条约终于签署。" },
+    { en: "Both sides expressed willingness to resolve the issue peacefully.", zh: "双方均表示愿意和平解决这一问题。" },
+    { en: "Economic sanctions have had a significant impact.", zh: "经济制裁产生了重大影响。" },
+    { en: "The summit focused on regional security and development.", zh: "峰会聚焦于地区安全与发展。" },
+    { en: "International cooperation is essential in combating pandemics.", zh: "国际合作对于抗击疫情至关重要。" },
+    { en: "The foreign minister held a press conference yesterday.", zh: "外交部长昨天举行了新闻发布会。" },
+    { en: "Bilateral relations have improved steadily over the years.", zh: "多年来，双边关系稳步改善。" },
+    { en: "The agreement covers trade, investment, and technology transfer.", zh: "该协议涵盖贸易、投资和技术转让。" },
+    { en: "Diplomatic channels remain open for dialogue.", zh: "外交渠道仍然对对话保持开放。" },
+    { en: "The resolution was adopted by a large majority.", zh: "该决议以绝大多数票获得通过。" },
+    { en: "Both parties committed to reducing carbon emissions.", zh: "双方承诺减少碳排放。" },
+    { en: "The embassy provides consular services to citizens abroad.", zh: "大使馆为海外公民提供领事服务。" },
+    { en: "Peace talks are scheduled to resume next month.", zh: "和平谈判定于下月恢复。" },
+    { en: "The joint statement outlined shared goals for the future.", zh: "联合声明概述了未来的共同目标。" }
+  ];
+
+  // ---------- 每日轮换逻辑 ----------
+  function getDailyItems(data, count) {
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+    const start = (dayOfYear * count) % data.length;
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      items.push(data[(start + i) % data.length]);
+    }
+    return items;
+  }
+
+  // 显示日期
+  const wordDate = document.getElementById('wordDate');
+  const now = new Date();
+  wordDate.textContent = `${now.getMonth() + 1}月${now.getDate()}日`;
+
+  // ---------- 渲染单词 ----------
+  const wordList = document.getElementById('wordList');
+  const dailyWords = getDailyItems(vocabData, 10);
+  dailyWords.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'word-item';
+    div.innerHTML = `
+      <div class="word-main">
+        <span class="word-text">${item.w}</span>
+        <span class="word-arrow">▼</span>
+      </div>
+      <div class="word-detail">
+        <span class="word-phonetic">${item.p}</span>
+        <span class="word-pos">${item.pos}</span>
+        <span class="word-mean">${item.m}${item.m2 ? '；' + item.m2 : ''}</span>
+        <div class="word-ex">${item.ex}</div>
+      </div>
+    `;
+    div.addEventListener('click', () => div.classList.toggle('expanded'));
+    wordList.appendChild(div);
+  });
+
+  // ---------- 渲染翻译句子 ----------
+  const transList = document.getElementById('transList');
+  const dailyTrans = getDailyItems(transData, 5);
+  dailyTrans.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'trans-item';
+    div.innerHTML = `
+      <div class="trans-en">${item.en}</div>
+      <div class="trans-zh">${item.zh}</div>
+      <div class="trans-hint">点击查看参考译文</div>
+    `;
+    div.addEventListener('click', () => {
+      div.classList.toggle('expanded');
+      const hint = div.querySelector('.trans-hint');
+      hint.textContent = div.classList.contains('expanded') ? '点击收起译文' : '点击查看参考译文';
+    });
+    transList.appendChild(div);
+  });
+
+  // ---------- 留言板 ----------
+  const GUEST_KEY = 'louis_guest_messages';
+  const guestForm = document.getElementById('guestForm');
+  const guestList = document.getElementById('guestList');
+  let memMsgs = []; // 内存兜底，防止 localStorage 不可用
+
+  function getMessages() {
+    try {
+      const raw = localStorage.getItem(GUEST_KEY);
+      if (raw) memMsgs = JSON.parse(raw);
+    } catch {}
+    return memMsgs;
+  }
+
+  function saveMessages(arr) {
+    memMsgs = arr;
+    try { localStorage.setItem(GUEST_KEY, JSON.stringify(arr)); } catch {}
+  }
+
+  function formatTime(ts) {
+    const d = new Date(ts);
+    return `${d.getMonth()+1}月${d.getDate()}日 ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  function renderMessages() {
+    const msgs = getMessages();
+    if (msgs.length === 0) {
+      guestList.innerHTML = '<div class="guest-empty">还没有留言，来抢沙发～</div>';
+      return;
+    }
+    guestList.innerHTML = msgs.slice().reverse().map(m => `
+      <div class="guest-item">
+        <div class="guest-avatar">${escapeHtml(m.name).charAt(0).toUpperCase()}</div>
+        <div class="guest-body">
+          <div class="guest-meta">
+            <span class="guest-name">${escapeHtml(m.name)}</span>
+            <span class="guest-time">${formatTime(m.time)}</span>
+          </div>
+          <div class="guest-msg">${escapeHtml(m.msg)}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  }
+
+  guestForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('guestName').value.trim();
+    const msg = document.getElementById('guestMsg').value.trim();
+    if (!name || !msg) return;
+    const msgs = getMessages();
+    msgs.push({ name, msg, time: Date.now() });
+    saveMessages(msgs);
+    renderMessages();
+    guestForm.reset();
+    guestList.scrollTop = 0;
+    showToast('留言成功！');
+  });
+
+  renderMessages();
+</script>
+</body>
+</html>
